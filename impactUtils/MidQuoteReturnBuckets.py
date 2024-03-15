@@ -17,8 +17,6 @@ class MidQuoteReturnBuckets():
         self.end_mid_prices = [None] * numBuckets
         self.mid_returns = [None] * numBuckets
 
-        print(data.getN(), numBuckets, bucketLen)
-
         iBucket = -1
         for i in range(data.getN()):
             ts = data.getMillisFromMidn(i)
