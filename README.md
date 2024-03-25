@@ -72,11 +72,13 @@ Trades directories in correct format: 65
 Quotes directories in correct format: 65
 ```
 ## Data processing
+Calculation function are located in ImpactUtils and the final matrix is in 
+https://drive.google.com/drive/folders/1mdwMFWPuGOWm_-DKcsIFt-A7e79w7gdp?usp=sharing  
 
 ## Filtering high volatility days
 
 ## Testing code 
-navigate to the project folder and run below:
+To run unittests for every functions, open a terminal or command prompt, navigate to the project folder and run below:
 ```bash
 python -m unittest discover -s tests
 ```
@@ -84,6 +86,5 @@ python -m unittest discover -s tests
 ## Summary statistics
 
 
-## deliverables
 
 
