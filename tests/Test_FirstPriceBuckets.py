@@ -1,5 +1,5 @@
 import unittest
-from taq.MyDirectories import MyDirectories
+from taq import MyDirectories
 from taq.TAQTradesReader import TAQTradesReader
 from impactUtils.FirstPriceBuckets import FirstPriceBuckets
 
@@ -10,7 +10,7 @@ class Test_FirstPriceBuckets(unittest.TestCase):
         startTS = None
         endTS = None
         numBuckets = 2
-        fileName = MyDirectories.BinRTTradesDir + "/20070919/IBM_trades.binRT"
+        fileName = MyDirectories.getTradesDir() + "/20070919/IBM_trades.binRT"
         data = TAQTradesReader(fileName)
 
         fpb = FirstPriceBuckets(data, numBuckets, startTS, endTS)

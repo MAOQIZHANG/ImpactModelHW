@@ -1,5 +1,4 @@
 import unittest
-
 import os
 import sys
 import inspect
@@ -16,7 +15,7 @@ class Test_TAQQuotesReader(unittest.TestCase):
 
     def test1(self):
 
-        reader = TAQQuotesReader( MyDirectories.getQuotesDir() + '/20070920/IBM_quotes.binRQ' )
+        reader = TAQQuotesReader(MyDirectories.getQuotesDir() + '/20070920/IBM_quotes.binRQ' )
         
         zz = list([
             reader.getN(),

@@ -1,7 +1,15 @@
+import os
+import sys
 import unittest
+import inspect
+
+currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
+parentdir = os.path.dirname(currentdir)
+sys.path.insert(0, parentdir)
+
 from impactUtils.VWAP import VWAP
 from taq.TAQTradesReader import TAQTradesReader
-from taq.MyDirectories import *
+from taq import MyDirectories
 
 # Test VWAP class used to calculate volume
 # weighted average price for a given day
@@ -9,7 +17,7 @@ from taq.MyDirectories import *
 class Test_VWAP(unittest.TestCase):
 
     def testVWAP(self):
-        filePathName = MyDirectories.BinRTTradesDir + "/20070919/IBM_trades.binRT"
+        filePathName = MyDirectories.getTradesDir() + "/20070919/IBM_trades.binRT"
         start930 = 19 * 60 * 60 * 1000 / 2
         end4 = 16 * 60 * 60 * 1000
         vwap = VWAP(TAQTradesReader(filePathName), start930, end4)
