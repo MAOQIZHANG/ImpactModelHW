@@ -71,6 +71,16 @@ finish removing data
 Trades directories in correct format: 65
 Quotes directories in correct format: 65
 ```
+## Data processing
+
+## Filtering high volatility days
+
+## Testing code 
+navigate to the project folder and run below:
+Execute the following command to start the test discovery and run all tests found in the tests directory:
+```bash
+python -m unittest discover -s tests
+```
 
 ## Summary statistics
 
