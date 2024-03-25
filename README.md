@@ -3,18 +3,22 @@ ImpactModel HW for Algo Trading
 
 ## Project Structure
 The project is organized as follows to ensure easy navigation and understanding:
-
+```bash
 ImpactModelHW/  
 │  
 ├── data/ # Data files and directories (Note that will also introduce how the data is downloaded in section 1.2)  
-│ ├── quotes/ # Place for raw data  
-│ └── trades/ # Directory for processed data  
+│ ├── quotes/ # quotes data
+│   ├── 20070620
+│   └── ...
+│ └── trades/ # trades data
+│   ├── 20070620
+│   └── ...
 │ └── SP500.txt # files for stocks tickers of interest  
 │  
 ├── impactUtils/ # Main source code for the project  
-│ ├── FirstPriceBuckets.py  
-│ └── ImbalanceValue.py  
-│ └── LastPriceBuckets.py  
+│ ├── FirstPriceBuckets.py  # function for calculating arrival price
+│ └── ImbalanceValue.py  # function for calculating imbalance
+│ └── LastPriceBuckets.py  # function for calculating last price
 │ └── MidQuoteReturnBuckets.py  
 │ └── ReturnBuckets.py  
 │ └── TickTest.py  
@@ -29,7 +33,7 @@ ImpactModelHW/
 ├── README.md # Overview and setup instructions (this file)  
 │  
 └── requirements.txt # Project dependencies  
-
+```
 
 ## Environment Setup
 
