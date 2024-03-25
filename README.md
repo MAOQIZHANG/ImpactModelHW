@@ -1,5 +1,6 @@
 # ImpactModelHW
-ImpactModel HW for Algo Trading
+Team Members:
+Maoqi Zhang, Jiaying Chen, Yunei Lu  
 
 ## Project Structure
 The project is organized as follows to ensure easy navigation and understanding:
