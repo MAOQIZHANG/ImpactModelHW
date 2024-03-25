@@ -71,3 +71,10 @@ finish removing data
 Trades directories in correct format: 65
 Quotes directories in correct format: 65
 ```
+
+## Summary statistics
+
+
+## deliverables
+
+
