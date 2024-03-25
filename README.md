@@ -12,13 +12,16 @@ ImpactModelHW/
 │ └── SP500.txt # files for stocks tickers of interest  
 │  
 ├── impactUtils/ # Main source code for the project  
-│ ├──   
-│ └──   
+│ ├── FirstPriceBuckets.py  
+│ └── ImbalanceValue.py  
+│ └── LastPriceBuckets.py  
+│ └── MidQuoteReturnBuckets.py  
+│ └── ReturnBuckets.py  
+│ └── TickTest.py  
+│ └── VWAP.py  
 │
-├── impactUtils/ # taq read functions  
-│ ├──   
-│ └──   
-│ └──   
+├── taq/ # taq read functions  
+│ ├── ... 
 │  
 ├── tests/ # Test suite for the project's code  
 │ ├── ...  
