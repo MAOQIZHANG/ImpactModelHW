@@ -1,10 +1,9 @@
-# Implementation of tick test for classifying
-# trades as either buyer (1) or seller (-1) initiated.
+from taq.TAQTradesReader import TAQTradesReader
+
+# Implementation of tick test for classifying trades as either buyer (1) or seller (-1) initiated.
 # Starting classification is undetermined (0).
 class TickTest(object):
-
-    # We need a tolerance to determine if price
-    # has changed
+    # We need a tolerance to determine if price has changed
     TOLERANCE = 0.00001
 
     def __init__(self):
@@ -21,7 +20,7 @@ class TickTest(object):
         self.prevPrice = newPrice
         return self.side
 
-    def classifyAll(self, data, startTimestamp, endTimestamp):
+    def classifyAll(self, data: TAQTradesReader, startTimestamp, endTimestamp):
         # Allocate space for classifications
         classifications = [0] * data.getN()
         resultCounter = 0
@@ -30,6 +29,6 @@ class TickTest(object):
                 continue
             if data.getTimestamp(i) >= endTimestamp:
                 break
-            classifications[resultCounter] = (data.getTimestamp(i), data.getPrice(i), self.classify(data.getPrice(i)))
+            classifications[resultCounter] = (data.getTimestamp(i), data.getPrice(i), data.getSize(i), self.classify(data.getPrice(i)))
             resultCounter = resultCounter + 1
         return classifications[0:resultCounter]
