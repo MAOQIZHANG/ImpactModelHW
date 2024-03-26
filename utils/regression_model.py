@@ -79,10 +79,53 @@ class ImpactModel:
         eta = np.exp(alpha)
         print(f"eta = {eta}, beta = {beta}")
         print(model.summary())
-        return
+        self.eta = eta
+        self.beta = beta
+        return alpha, beta
+
+    def parametric_bootstrap(self, num_simulations=1000):
+        alphas = []
+        betas = []
+
+        for _ in range(num_simulations):
+            # Simulate data based on estimated parameters
+            simulated_data = self.simulate_data()
+
+            # Fit regression model on simulated data
+            X_sim = sm.add_constant(simulated_data["X"])
+            y_sim = simulated_data["y"]
+            model_sim = sm.OLS(y_sim, X_sim).fit()
+
+            # Append estimated parameters to lists
+            alphas.append(model_sim.params.iloc[0])  # Use iloc indexer
+            betas.append(model_sim.params.iloc[1])  # Use iloc indexer
+
+        return alphas, betas
+
+    def simulate_data(self):
+        # Simulate data based on estimated parameters
+        # You need to replace this with actual simulation logic based on your model
+        simulated_X = np.random.normal(loc=self.log_data["X"].mean(), scale=self.log_data["X"].std(), size=len(self.log_data))
+        simulated_y = np.random.normal(loc=self.log_data["y"].mean(), scale=self.log_data["y"].std(), size=len(self.log_data))
+
+        simulated_data = pd.DataFrame({"X": simulated_X, "y": simulated_y})
+
+        return simulated_data
+
 
 # Usage
 # Create an instance of the model and call methods
 impact_model = ImpactModel('Impact-Model-Matrix')
 impact_model.read_data()
 impact_model.regress()
+# Perform parametric bootstrap
+alphas_bootstrap, betas_bootstrap = impact_model.parametric_bootstrap(num_simulations=10)
+
+def plot_histograms(alphas, betas, filename='bootstrap_histogram.png'):
+    plt.hist(alphas, bins=30, alpha=0.5, label='Alphas')
+    plt.hist(betas, bins=30, alpha=0.5, label='Betas')
+    plt.legend()
+    plt.savefig(filename)  # Save the plot to a file
+    plt.close()  # Close the plot to release memory
+
+plot_histograms(alphas_bootstrap, betas_bootstrap, filename='bootstrap_histogram.png')
