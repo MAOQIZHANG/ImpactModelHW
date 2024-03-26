@@ -27,7 +27,7 @@ for day in range(0, num_of_days-1):
     end_day = start_day + step_size
     rolling_volatility = df.iloc[:, start_day:end_day].std(axis=1)
     # Convert to daily value
-    daily_volatility = rolling_volatility * np.sqrt(step_size * rolling_window_days)
+    daily_volatility = rolling_volatility * np.sqrt(step_size)
     volatility_df.iloc[:, day+1] = daily_volatility
 
 # print(volatility_df)
@@ -45,5 +45,5 @@ for i, row in volatility_df.iterrows():
     high_vol_dict[i] = exceeding_columns
 # print(high_vol_dict)
     
-"""with open("high_vol_days.json", "w") as outfile: 
+"""with open("../data/high_vol_days.json", "w") as outfile: 
     json.dump(high_vol_dict, outfile)"""
