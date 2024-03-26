@@ -3,3 +3,6 @@ def getTradesDir():
 
 def getQuotesDir():
     return 'data/quotes'
+
+def getOutputDir():
+    return 'output'
