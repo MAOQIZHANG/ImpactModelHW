@@ -3,3 +3,4 @@ __pycache__
 data/trades/
 data/quotes/
 Impact-Model-Matrix/
+outputs/
