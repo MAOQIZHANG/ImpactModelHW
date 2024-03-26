@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 import json
 
-with open('/Users/chenjiaying/Desktop/hw2_data/Impact-Model-Matrix/2MinMidQuoteReturns.pkl', 'rb') as f:
+with open('Impact-Model-Matrix/2MinMidQuoteReturns.pkl', 'rb') as f:
     df = pd.read_pickle(f)
 
 # DataFrame containing 2-minute mid-quote returns of 500 stocks for 65 days
