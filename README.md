@@ -86,6 +86,13 @@ To run unittests for every functions, open a terminal or command prompt, navigat
 ```bash
 python -m unittest discover -s tests
 ```
+## Regression
+<img width="845" alt="image" src="https://github.com/MAOQIZHANG/ImpactModelHW/assets/67251502/b0b0e6bb-92f6-4ff3-ada0-3c4f11c6582f">  
+
+Transform it to linear regression as follows:   
+
+<img width="594" alt="image" src="https://github.com/MAOQIZHANG/ImpactModelHW/assets/67251502/f817e84b-676d-4400-9812-d6692fe1f9a4">
+
 
 ## Summary statistics
 
