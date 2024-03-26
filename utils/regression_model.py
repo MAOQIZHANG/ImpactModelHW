@@ -2,8 +2,9 @@ from sklearn.linear_model import LinearRegression
 import numpy as np
 import pandas as pd
 import json
-from scipy.optimize import curve_fit
-from sklearn.utils import resample
+import matplotlib.pyplot as plt
+
+import statsmodels.api as sm
 
 class ImpactModel:
     def __init__(self, filepath):
@@ -23,6 +24,7 @@ class ImpactModel:
         melted_df = pd.melt(df.reset_index(), id_vars='index', value_vars=df.columns, var_name='Day',
                             value_name=var_name).rename(columns={'index': 'Stock'})
         return melted_df[var_name]
+
     def read_data(self):
         json_file_path = f"{self.filepath}/high_vol_days.json"
 
@@ -32,7 +34,6 @@ class ImpactModel:
         stocks = list(high_vol_days.keys())  # Or however you have your stocks defined
         days = range(65)  # Adjust based on your actual days
 
-        # Initialize DataFrame with False values
         high_vol_df = pd.DataFrame(True, index=stocks, columns=days)
         for stock, high_vol_days_list in high_vol_days.items():
             for day_idx in high_vol_days_list:
@@ -49,29 +50,36 @@ class ImpactModel:
         V_long = self.melt_df(daily_value, 'V')
         h_long = self.melt_df(temporary_impact, 'h')
         sigma_long = self.melt_df(volatility, 'sigma')
-        self.data["X"] = X_long
-        self.data["V"] = V_long.astype(float)
-        self.data["h"] = h_long
-        self.data["sigma"] = sigma_long.astype(float)
-        self.data.dropna(axis=0, inplace=True)
+        data = pd.DataFrame()
+        data["X"] = np.abs(X_long)
+        data["sign_X"] = np.sign(X_long)
+        data["V"] = V_long.astype(float)
+        data["h"] = h_long
+        data["sigma"] = sigma_long.astype(float)
+        data.dropna(axis=0, inplace=True)
+        self.data["log_X"] = np.log(data["X"])
+        self.data["sign_X"] = data["sign_X"]
+        self.data["log_V"] = np.log(data["V"])
+        self.data["log_sigma"] = np.log(data["sigma"])
+        self.data["log_h"] = np.log(np.abs(data["h"]))
+        self.data["sign_h"] = np.sign(data["h"])
+        self.log_data = pd.DataFrame()
+        self.log_data["y"] = self.data["sign_h"] * data["sign_X"] * self.data["log_h"] - self.data["log_sigma"]
+        self.log_data["X"] = self.data["log_X"] - self.data["log_V"] - np.log(6/6.5)
+        self.log_data.replace([np.inf, -np.inf], np.nan, inplace=True)
+        self.log_data.dropna(axis=0, inplace=True)
 
-    def universal_model(self, X, eta, beta, sigma, V):
-        return eta * sigma * (X / (V * (6 / 6.5)))**beta
+
     def regress(self):
-        if self.data is None:
-            print("Data not loaded. Please run read_data() first.")
-            return
-        X = self.data['X'].values
-        sigma = self.data['sigma'].values
-        V = self.data['V'].values
-        h = self.data['h'].values
-        def fit_function(X, eta, beta):
-            return self.universal_model(X, eta, beta, sigma, V)
-        initial_eta_guess = 1.0
-        initial_beta_guess = 0.5
-        params, _ = curve_fit(fit_function, X, h, p0=[initial_eta_guess, initial_beta_guess])
-        self.eta, self.beta = params
-        print(f"Fitted Parameters - eta: {self.eta}, beta: {self.beta}")
+        X = sm.add_constant(self.log_data["X"])
+        y = self.log_data["y"]
+        model = sm.OLS(y, X).fit()
+        alpha = model.params[0]  # Intercept (alpha)
+        beta = model.params[1]  # Slope(s) (beta values)
+        eta = np.exp(alpha)
+        print(f"eta = {eta}, beta = {beta}")
+        print(model.summary())
+        return
 
 # Usage
 # Create an instance of the model and call methods
