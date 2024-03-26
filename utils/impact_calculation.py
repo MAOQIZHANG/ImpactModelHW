@@ -1,7 +1,7 @@
 import pandas as pd
 import os
 
-with open('Impact-Model-Matrix/vwap_end_57600000.pkl', 'rb') as f:
+with open('Impact-Model-Matrix/vwap_end_55800000.pkl', 'rb') as f:
     VWAP_330 = pd.read_pickle(f)
 
 with open('Impact-Model-Matrix/ArrivalPrice.pkl', 'rb') as f:
