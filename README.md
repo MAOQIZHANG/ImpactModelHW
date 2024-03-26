@@ -72,10 +72,14 @@ Trades directories in correct format: 65
 Quotes directories in correct format: 65
 ```
 ## Data processing
-Calculation function are located in ImpactUtils and the final matrix is in 
+Calculation function are located in ImpactUtils and the final matrices are in 
 https://drive.google.com/drive/folders/1mdwMFWPuGOWm_-DKcsIFt-A7e79w7gdp?usp=sharing  
 
 ## Filtering high volatility days
+Volatility is a standard deviation of a 2 minutemid-quote returns computed using last 10 days of data and scaled to a daily value. 
+We filter the volatility by the 95% percent cap.
+After the filtering, the matrices for volatility and high vol days are in  
+https://drive.google.com/drive/folders/1mdwMFWPuGOWm_-DKcsIFt-A7e79w7gdp?usp=sharing  
 
 ## Testing code 
 To run unittests for every functions, open a terminal or command prompt, navigate to the project folder and run below:
