@@ -64,7 +64,7 @@ class ImpactModel:
         self.data["log_h"] = np.log(np.abs(data["h"]))
         self.data["sign_h"] = np.sign(data["h"])
         self.log_data = pd.DataFrame()
-        self.log_data["y"] = self.data["sign_h"] * data["sign_X"] * self.data["log_h"] - self.data["log_sigma"]
+        self.log_data["y"] = self.data["sign_h"] * data["sign_X"] * (self.data["log_h"] - self.data["log_sigma"])
         self.log_data["X"] = self.data["log_X"] - self.data["log_V"] - np.log(6/6.5)
         self.log_data.replace([np.inf, -np.inf], np.nan, inplace=True)
         self.log_data.dropna(axis=0, inplace=True)
