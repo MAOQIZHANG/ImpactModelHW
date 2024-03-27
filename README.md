@@ -95,7 +95,7 @@ Transform it to linear regression as follows:
 
 
 ## Summary statistics
-
+See the notebook included in the dir
 
 
 
