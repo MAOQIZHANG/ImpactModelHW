@@ -1,7 +1,6 @@
 from taq.TAQTradesReader import TAQTradesReader
 from impactUtils.TickTest import TickTest
 from impactUtils.VWAP import VWAP
-from taq import MyDirectories
 
 
 class ImbalanceValue():
@@ -29,10 +28,3 @@ class ImbalanceValue():
         else:
             return self.imbalance_size * self.vwap.getVWAP()
 
-
-
-if __name__ == "__main__":
-    filePathName = MyDirectories.getTradesDir() + "/20070919/IBM_trades.binRT"
-    data = TAQTradesReader(filePathName)
-    iv = ImbalanceValue(data)
-    print(iv.getImbalanceSize(), iv.getImbalnceValue())
