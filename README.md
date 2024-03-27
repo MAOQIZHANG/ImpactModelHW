@@ -1,4 +1,7 @@
 # ImpactModelHW
+all codes and deliveries location:
+https://github.com/MAOQIZHANG/ImpactModelHW
+
 Team Members:
 Maoqi Zhang, Jiaying Chen, Yunlei Lu  
 
