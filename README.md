@@ -1,6 +1,6 @@
 # ImpactModelHW
 Team Members:
-Maoqi Zhang, Jiaying Chen, Yunei Lu  
+Maoqi Zhang, Jiaying Chen, Yunlei Lu  
 
 ## Project Structure
 The project is organized as follows to ensure easy navigation and understanding:
