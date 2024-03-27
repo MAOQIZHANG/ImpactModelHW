@@ -4,3 +4,5 @@ data/trades/
 data/quotes/
 Impact-Model-Matrix/
 outputs/
+.idea
+.ipynb_checkpoints
